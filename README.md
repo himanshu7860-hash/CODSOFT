@@ -40,9 +40,6 @@ The **Student Marks & Grade Calculator** is a console-based Java application tha
 
 ---
 
-## 🖥️ Sample Output
----
-
 ## 🛠️ Technologies & Tools Used
 
 | Technology | Purpose |
@@ -71,5 +68,45 @@ Through building this project, I strengthened my understanding of:
 - ✅ **User Experience** — Designing readable console output with dividers, spacing, and motivational remarks
 
 ---
+---
 
-## 📂 Project Structure
+## ▶️ How to Run
+
+### Prerequisites
+- Java JDK 8 or above installed
+- Any terminal / command prompt
+
+### Steps
+
+```bash
+# Step 1: Clone the repository
+git clone https://github.com/your-username/your-repo-name.git
+
+# Step 2: Navigate to the project folder
+cd himanshu7860-hash/CODSOFT
+
+# Step 3: Compile the Java file
+javac StudentReportCard.java
+
+# Step 4: Run the program
+java StudentReportCard
+```
+
+---
+
+## 👨‍💻 Author
+
+**Your Name**  
+Java Programming Intern @ CodSoft  
+📧 hmsharma7860@gmail.com
+🔗 [LinkedIn](www.linkedin.com/in/himanshu-5221b8419) | [GitHub](https://github.com/himanshu7860-hash)
+
+---
+
+## 📃 License
+
+This project is intended for educational purposes as part of the CodSoft Internship Program.
+
+---
+
+> ⭐ If you found this helpful, consider giving this repo a star!
