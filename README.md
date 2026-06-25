@@ -41,3 +41,35 @@ The **Student Marks & Grade Calculator** is a console-based Java application tha
 ---
 
 ## 🖥️ Sample Output
+---
+
+## 🛠️ Technologies & Tools Used
+
+| Technology | Purpose |
+|------------|---------|
+| **Java (JDK 8+)** | Core programming language |
+| **Scanner Class** | Reading user input from the console |
+| **Arrays** | Storing subject-wise marks |
+| **Control Flow** | `if-else`, `for`, `while` loops for logic |
+| **String Formatting** | `printf` and `format` for clean output |
+| **Git & GitHub** | Version control and project hosting |
+
+---
+
+## 💡 Concepts & Skills Learned
+
+Through building this project, I strengthened my understanding of:
+
+- ✅ **Modular Programming** — Breaking code into separate methods for input, calculation, grading, and display instead of writing everything in `main()`
+- ✅ **Input Validation** — Handling invalid inputs like characters, negative marks, or marks above 100 using `hasNextInt()` and range checks
+- ✅ **Array Handling** — Dynamically collecting and iterating over marks using `int[]` arrays
+- ✅ **Type Casting** — Using `(double)` casting for precise average percentage calculation
+- ✅ **`printf` Formatting** — Formatting decimal values with `%.2f` for clean percentage display
+- ✅ **Conditional Logic** — Implementing multi-level `if-else` chains for grade assignment
+- ✅ **Loops** — Using nested `while` loops for multi-student support and input retry on invalid entries
+- ✅ **Clean Code Practices** — Using constants (`MAX_MARKS`), descriptive method names, and utility methods like `printDivider()`
+- ✅ **User Experience** — Designing readable console output with dividers, spacing, and motivational remarks
+
+---
+
+## 📂 Project Structure
