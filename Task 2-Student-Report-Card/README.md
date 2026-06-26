@@ -1,4 +1,4 @@
-# 📋 Student Report Card — CodSoft Java Internship | Task 4
+# 📋 Student Report Card — CodSoft Java Internship | Task 2
 
 > A console-based Student Report Card generator built using Core Java that calculates total marks, average percentage, and assigns a grade with a remark.
 
