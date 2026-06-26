@@ -1,4 +1,4 @@
-# 💱 Currency Converter — CodSoft Java Internship | Task 2
+# 💱 Currency Converter — CodSoft Java Internship | Task 4
 
 > A console-based Currency Converter built using Core Java that fetches **live exchange rates** from a free API — no API key required!
 
@@ -168,7 +168,7 @@ Do you want to convert again? (yes/no): no
 ## 🏢 About the Internship
 
 **Internship:** CodSoft Java Programming Internship  
-**Task Number:** Task 2 — Currency Converter  
+**Task Number:** Task 4 — Currency Converter  
 **Language:** Java  
 **API Used:** [ExchangeRate-API Free Tier](https://open.er-api.com) *(no key required)*
 
