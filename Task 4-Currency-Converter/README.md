@@ -1,26 +1,25 @@
-# 🏧 ATM Interface — CodSoft Java Internship | Task 3
+# 💱 Currency Converter — CodSoft Java Internship | Task 2
 
-> A console-based ATM Interface System built using Core Java as part of the **CodSoft Java Programming Internship**.
+> A console-based Currency Converter built using Core Java that fetches **live exchange rates** from a free API — no API key required!
 
 ---
 
 ## 📌 Project Description
 
-This project simulates a real-world **ATM (Automated Teller Machine)** system through a Java console application. The user is greeted with a menu-driven interface where they can perform common banking operations such as checking their account balance, depositing money, and withdrawing cash — all while the program validates every input and displays appropriate success or error messages.
+This project is a **real-time Currency Converter** built as a Java console application. The user selects a base currency and a target currency from a list of 10 popular world currencies, enters an amount, and the program fetches the latest exchange rate from a live API and instantly displays the converted result along with the exchange rate used.
 
-The project is divided into clean, well-structured classes following Object-Oriented Programming principles, making it easy to understand, extend, and maintain.
+The entire project is contained in a **single Java file**, making it clean and beginner-friendly, with every section clearly commented.
 
 ---
 
 ## ✨ Features
 
-- ✅ **Check Balance** — View the current account balance at any time
-- ✅ **Deposit Money** — Add funds to the account with minimum amount validation
-- ✅ **Withdraw Money** — Withdraw cash with balance and withdrawal limit checks
-- ✅ **Input Validation** — Handles invalid inputs (letters, negative numbers, zero amounts) gracefully
-- ✅ **Withdrawal Limit** — Enforces a per-transaction maximum withdrawal cap (₹10,000)
-- ✅ **User-Friendly Messages** — Clear success and error messages for every operation
-- ✅ **Loop-Based Menu** — Keeps the session running until the user chooses to exit
+- ✅ **Live Exchange Rates** — Fetches real-time rates from `open.er-api.com` (free, no API key needed)
+- ✅ **10 Popular Currencies** — USD, INR, EUR, GBP, JPY, AUD, CAD, AED, SGD, CHF
+- ✅ **Currency Selection Menu** — Numbered menu for easy base and target currency selection
+- ✅ **Amount Validation** — Rejects zero, negative, and non-numeric inputs
+- ✅ **Detailed Result Display** — Shows converted amount, currency symbol, and exchange rate used
+- ✅ **Convert Again Option** — Lets the user do multiple conversions in one session
 
 ---
 
@@ -28,57 +27,30 @@ The project is divided into clean, well-structured classes following Object-Orie
 
 | Technology | Purpose |
 |---|---|
-| **Java (JDK 8+)** | Core programming language |
+| **Java (JDK 11+)** | Core programming language |
+| **java.net.http.HttpClient** | Sending HTTP GET requests to the API |
+| **ExchangeRate-API (free tier)** | Source of live currency exchange rates |
+| **LinkedHashMap** | Storing and displaying currencies in order |
 | **Scanner (java.util)** | Reading user input from the console |
-| **Object-Oriented Design** | Structuring code into classes and objects |
-| **Exception Handling** | Catching invalid inputs using `try-catch` |
 
 ---
 
 ## 🧠 Concepts Used
 
-### 1. Object-Oriented Programming (OOP)
-The project is built around two core classes:
-- **`BankAccount`** — Represents the user's bank account (data + basic operations)
-- **`ATM`** — Represents the ATM machine (business logic + validation)
-- **`Main`** — The entry point that handles the user interface
+### 1. HTTP Networking
+Uses Java's built-in `HttpClient` (introduced in Java 11) to send a `GET` request to the exchange rate API and receive a JSON response — no external libraries needed.
 
-### 2. Encapsulation
-The `balance` field in `BankAccount` is declared `private`, meaning it cannot be accessed directly from outside the class. It is only modified through controlled methods (`deposit()` and `withdraw()`), keeping data safe.
+### 2. Manual JSON Parsing
+The API response is a raw JSON string. Instead of using a library like Gson, the program manually searches for the target currency key using `String.indexOf()` and extracts the rate value — a great exercise in string manipulation.
 
-### 3. Method Design
-Each ATM operation is implemented as its own method:
-- `checkBalance()` — reads and displays the balance
-- `deposit(double amount)` — validates and adds funds
-- `withdraw(double amount)` — validates and deducts funds
+### 3. Collections — LinkedHashMap
+All 10 supported currencies are stored in a `LinkedHashMap<Integer, String[]>`, which maps a menu number to an array holding the currency code, name, and symbol. `LinkedHashMap` preserves insertion order, so the menu always appears in the same sequence.
 
-### 4. Input Validation
-All user inputs are wrapped in `try-catch` blocks to handle `NumberFormatException` when non-numeric values are entered, preventing the program from crashing.
+### 4. Input Validation & Exception Handling
+Every user input is wrapped in a `try-catch` block to catch `NumberFormatException`, and value ranges are checked (e.g., amount must be > 0, menu choice must be 1–10), keeping the program crash-proof.
 
-### 5. Control Flow
-- A `while` loop keeps the ATM session running continuously
-- A `switch` statement routes the user to the correct operation based on their menu choice
-- `if-else` chains handle multiple validation scenarios in sequence
-
-### 6. Static Constants
-Maximum withdrawal limit and minimum deposit amount are stored as `static final` constants, making them easy to find and change in one place.
-
----
-
-## 🗂️ Project Structure
-
-```
-ATM_Project/
-│
-├── BankAccount.java    → Stores account holder name and balance
-│                         Methods: deposit(), withdraw(), getBalance()
-│
-├── ATM.java            → ATM logic with validation
-│                         Methods: checkBalance(), deposit(), withdraw()
-│
-└── Main.java           → Entry point and user interface
-                          Handles menu loop and input reading
-```
+### 5. Static Helper Methods
+The logic is broken into focused static methods — `fetchExchangeRate()`, `getValidMenuChoice()`, and `getValidAmount()` — keeping the `main()` method clean and readable.
 
 ---
 
@@ -88,38 +60,28 @@ ATM_Project/
 Program Starts
      │
      ▼
-User enters their name → BankAccount is created with ₹5,000 starting balance
+Display currency menu (10 currencies with codes & symbols)
      │
      ▼
-ATM object is created and linked to the BankAccount
+User selects BASE currency  →  User selects TARGET currency
      │
      ▼
-┌─────────────────────────────┐
-│         MAIN MENU           │
-│  1. Check Balance           │
-│  2. Deposit Money           │
-│  3. Withdraw Money          │
-│  4. Exit                    │
-└─────────────────────────────┘
+User enters amount to convert
      │
-     ├── Option 1 → ATM.checkBalance() → prints name + balance
+     ▼
+HTTP GET → https://open.er-api.com/v6/latest/{BASE}
      │
-     ├── Option 2 → User enters amount
-     │              ATM.deposit() validates:
-     │              • Amount > 0?
-     │              • Amount >= minimum deposit?
-     │              → If valid: balance increases, success message shown
-     │              → If invalid: error message shown, balance unchanged
+     ▼
+Parse JSON response → extract rate for TARGET currency
      │
-     ├── Option 3 → User enters amount
-     │              ATM.withdraw() validates:
-     │              • Amount > 0?
-     │              • Amount <= withdrawal limit (₹10,000)?
-     │              • Amount <= current balance?
-     │              → If valid: balance decreases, success message shown
-     │              → If invalid: error message shown, balance unchanged
+     ▼
+converted amount = input amount × exchange rate
      │
-     └── Option 4 → Session ends, goodbye message displayed
+     ▼
+Display result: amount, converted value, rate used
+     │
+     ▼
+Ask "Convert again?" → Yes: repeat | No: exit
 ```
 
 ---
@@ -127,27 +89,30 @@ ATM object is created and linked to the BankAccount
 ## ▶️ How to Run
 
 ### Prerequisites
-- Java JDK 8 or above installed
-- A terminal / command prompt
+- **Java JDK 11 or above** (uses `java.net.http.HttpClient`)
+- Active internet connection (needed to fetch live rates)
+
+Check your Java version:
+```bash
+java -version
+```
 
 ### Steps
 
-**Step 1 — Save all three files in the same folder:**
+**Step 1 — Save the file:**
 ```
-ATM_Project/
-  ├── BankAccount.java
-  ├── ATM.java
-  └── Main.java
+CurrencyConverter/
+  └── CurrencyConverter.java
 ```
 
-**Step 2 — Open terminal in that folder and compile:**
+**Step 2 — Compile:**
 ```bash
-javac BankAccount.java ATM.java Main.java
+javac CurrencyConverter.java
 ```
 
-**Step 3 — Run the program:**
+**Step 3 — Run:**
 ```bash
-java Main
+java CurrencyConverter
 ```
 
 ---
@@ -156,61 +121,56 @@ java Main
 
 ```
 ==========================================
-       WELCOME TO JAVA ATM SYSTEM
+      JAVA CURRENCY CONVERTER
+     (Live Rates via ExchangeRate-API)
 ==========================================
-Enter your name: Rahul
-Hello, Rahul! Your account has been loaded.
-Starting Balance: Rs. 5000.00
+
+  No.  Code   Name                      Symbol
+  1    USD    US Dollar                 $
+  2    INR    Indian Rupee              Rs.
+  3    EUR    Euro                      EUR
+  ...
+
+Enter number for BASE currency: 1
+Enter number for TARGET currency: 2
+Enter amount in US Dollar ($): 500
+
+  Fetching live exchange rate... please wait.
 
 ==========================================
-             ATM MAIN MENU
+           CONVERSION RESULT
 ==========================================
-  1. Check Balance
-  2. Deposit Money
-  3. Withdraw Money
-  4. Exit
+  $ 500.00  (USD)
+        converts to
+  Rs. 41750.00  (INR)
+------------------------------------------
+  Exchange Rate: 1 USD = 83.5000 INR
+  (Rates provided by open.er-api.com)
 ==========================================
-Enter your choice (1-4): 2
 
---- DEPOSIT MONEY ---
-Enter amount to deposit (Rs.): 2000
-----------------------------------
-  SUCCESS: Rs. 2000.00 deposited successfully!
-  New Balance: Rs. 7000.00
-----------------------------------
+Do you want to convert again? (yes/no): no
 
-Enter your choice (1-4): 3
-
---- WITHDRAW MONEY ---
-Enter amount to withdraw (Rs.): 15000
-----------------------------------
-  ERROR: Cannot withdraw more than Rs. 10000.00 at once.
-----------------------------------
-
-Enter your choice (1-4): 4
-
-  Thank you for using Java ATM System!
-  Goodbye, Rahul!
-==========================================
+  Thank you for using Java Currency Converter! Goodbye!
 ```
 
 ---
 
 ## 📚 What I Learned
 
-- Designing a real-world problem using **Object-Oriented Programming**
-- Writing **multiple classes** that communicate with each other
-- Using **encapsulation** to protect sensitive data (account balance)
-- Implementing **input validation** and **exception handling**
-- Building a **menu-driven console application** in Java
+- Making **real-time API calls** in Java using `HttpClient`
+- **Parsing JSON responses** manually without external libraries
+- Using **Collections** (`LinkedHashMap`) to structure menu data
+- Writing **reusable static methods** for clean, modular code
+- Handling **network errors and invalid inputs** gracefully
 
 ---
 
 ## 🏢 About the Internship
 
 **Internship:** CodSoft Java Programming Internship  
-**Task Number:** Task 3 — ATM Interface  
+**Task Number:** Task 2 — Currency Converter  
 **Language:** Java  
+**API Used:** [ExchangeRate-API Free Tier](https://open.er-api.com) *(no key required)*
 
 ---
 
