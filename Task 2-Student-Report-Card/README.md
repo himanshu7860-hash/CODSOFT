@@ -172,7 +172,7 @@ Thank you for using the Grade Calculator. Bye!
 ## 🏢 About the Internship
 
 **Internship:** CodSoft Java Programming Internship  
-**Task Number:** Task 4 — Student Report Card  
+**Task Number:** Task 2 — Student Report Card  
 **Language:** Java  
 
 ---
